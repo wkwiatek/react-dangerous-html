@@ -65,7 +65,7 @@ class DangerousHTML extends React.Component {
 
   componentWillMount() {
     // Do not render html with scripts on server side
-    if (this.props.html.indexOf('script') > -1) {
+    if (this.props.html && this.props.html.indexOf('script') > -1) {
       this.setState({ canRenderHTML: false });
     }
   }
@@ -112,7 +112,7 @@ class DangerousHTML extends React.Component {
   insertScriptsIfNeeded() {
     const { html } = this.props;
 
-    if (html.indexOf('script') > -1 && this.element) {
+    if (html && html.indexOf('script') > -1 && this.element) {
       this.element.innerHTML = html;
 
       replaceScriptElementsRecursive(this.element, this.scriptElements);
